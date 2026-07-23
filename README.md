@@ -1,4 +1,4 @@
-# agentic_base
+# Agentic base template
 
 Tech-agnostic Cursor template for agentic programming: role agents, lean SDLC rules, and reusable skills.
 
