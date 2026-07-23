@@ -1,0 +1,13 @@
+---
+description: SDLC loop — plan first, smallest change, tests, docs only when needed
+alwaysApply: true
+---
+
+# SDLC
+
+- Non-trivial work: plan → implement → review/secure → verify (see `docs/workflow.md` and `AGENTS.md`).
+- Prefer the smallest change that satisfies the approved plan.
+- Every behavior change needs a matching test, or an explicit note: `no test because: …`.
+- Update docs only when user-facing behavior or public API/contracts change.
+- Before claiming merge-ready: run stack checks and use `verifier` / `ship-checklist` when appropriate.
+- Capture recurring agent mistakes as new focused rules later — do not grow this file into a novel.

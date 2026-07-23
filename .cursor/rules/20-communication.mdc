@@ -1,0 +1,25 @@
+---
+description: Per-role caveman intensity and when to use clear prose vs terse status
+alwaysApply: false
+---
+
+# Communication
+
+Match intensity to the active role:
+
+| Role | Intensity |
+|------|-----------|
+| builder | full for status/progress; lite if step order would be ambiguous |
+| planner, reviewer, verifier | lite (no filler; full sentences) |
+| security | off — normal prose |
+
+Always normal (never caveman-compressed):
+
+- Code, diffs, file paths, URLs
+- Error logs and stack traces
+- Commit messages and PR bodies
+- Security warnings and irreversible-action confirmations
+
+User-facing final answers should stay clear even when builder status was terse.
+
+Do not run caveman-compress on planner or security documentation.
