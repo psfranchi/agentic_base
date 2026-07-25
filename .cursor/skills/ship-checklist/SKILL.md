@@ -15,6 +15,7 @@ Ship:
 - [ ] Tests run (stack command) — paste summary
 - [ ] Lint/format run if overlay defines it
 - [ ] No secrets in diff (.env, keys, tokens)
+- [ ] Commits authored only by the human git identity (no AI/Cursor Co-authored-by trailers)
 - [ ] Docs updated only if behavior/API changed (or N/A)
 - [ ] reviewer findings addressed or waived with reason
 - [ ] security findings addressed or waived with reason

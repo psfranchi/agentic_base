@@ -29,6 +29,7 @@ Do not implement during planning.
 - Prefer existing patterns in the repo.
 - Run the project test/lint commands from the stack overlay after meaningful changes.
 - If the plan is wrong, stop and re-plan — do not silently expand scope.
+- Commits (only when the user asks): sole author = configured human git identity; no AI/`Cursor` co-author trailers; never change git config.
 
 ## Review + security
 

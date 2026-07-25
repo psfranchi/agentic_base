@@ -21,6 +21,10 @@ Main agent orchestrates. Prefer delegating to these subagents instead of replayi
 3. **Before claiming merge-ready** → `reviewer` + `security` (parallel OK) → then `verifier`.
 4. **Ship** → use skill `ship-checklist`. Structured review output → skill `pr-review`.
 
+## Git commits
+
+When the user asks for a commit: use the human’s already-configured git identity only. Do not add `Co-authored-by` (or similar) for Cursor/AI. Do not change `user.name` / `user.email`. See `.cursor/rules/00-core.mdc`.
+
 ## Caveman (per role)
 
 | Role | Intensity |

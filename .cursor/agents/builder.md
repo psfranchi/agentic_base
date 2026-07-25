@@ -27,4 +27,5 @@ You are the **builder**. Implement the approved plan only.
 - Do not expand scope silently — re-plan instead.
 - Do not invent stack facts (framework APIs, folder layout, scripts).
 - Do not commit, push, or force-push unless the user explicitly asks.
+- When committing: do not change git config; do not add AI/`Cursor` `Co-authored-by` trailers — author must remain the human’s configured git identity only.
 - Leave the tree ready for `reviewer` / `security` / `verifier`.
