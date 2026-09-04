@@ -5,7 +5,9 @@ alwaysApply: true
 
 # SDLC
 
-- Non-trivial work: plan → implement → review/secure → verify (see `docs/workflow.md` and `AGENTS.md`).
+- Non-trivial work: **explore (if needed) → plan → implement → review/secure → verify** (see `docs/workflow.md` and `AGENTS.md`).
+- **Explore first for search:** when the task needs codebase search, grep, “where is X?”, or subsystem mapping, spawn **explore** (`Task` `explore` / skill `explore-codebase` / agent `explorer`) instead of filling **builder** context with large greps.
+- **Plan before build:** if there is no approved plan yet and the work is non-trivial (multi-file, unclear approach, API/schema/auth, or >~15 minutes), spawn **planner** and wait for approval — then **builder** only from that plan. Skip formal plan only for trivial one-file obvious fixes.
 - Prefer the smallest change that satisfies the approved plan.
 - Every behavior change needs a matching test, or an explicit note: `no test because: …`.
 - Update docs only when user-facing behavior or public API/contracts change.

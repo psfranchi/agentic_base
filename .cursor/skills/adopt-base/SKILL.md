@@ -51,7 +51,7 @@ Copy from source → target:
 | From | To |
 |------|----|
 | `AGENTS.md` | target root (merge Stack if they already have AGENTS.md) |
-| `docs/workflow.md`, `docs/overlay-guide.md` | `target/docs/` |
+| `docs/workflow.md`, `docs/overlay-guide.md`, `docs/recommended-skills.md` | `target/docs/` |
 | `.cursor/agents/*.md` | `target/.cursor/agents/` |
 | `.cursor/rules/00-core.mdc`, `10-sdlc.mdc`, `20-communication.mdc`, `90-stack-placeholder.mdc` | `target/.cursor/rules/` |
 | `.cursor/skills/**` | `target/.cursor/skills/` |

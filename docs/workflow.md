@@ -1,8 +1,20 @@
-# Workflow: plan → build → review → secure → verify
+# Workflow: explore → plan → build → review → secure → verify
+
+## When to explore
+
+Spawn **explorer** / Task `explore` (skill `explore-codebase`) when the work needs:
+
+- Codebase search, grep, “where is X?”
+- Mapping a subsystem across many files
+- Research before planning (patterns, ownership, existing APIs)
+
+Do **not** load large search dumps into **builder** context — explore returns a short path map, then plan/build.
+
+Skip explore when the user already named the file and the change is local.
 
 ## When to plan
 
-Use `planner` (or Plan mode) when any of these apply:
+Use `planner` (or Plan mode) when any of these apply **and there is no approved plan yet**:
 
 - Multiple files or layers change
 - API / schema / auth behavior changes
@@ -25,11 +37,13 @@ Do not implement during planning.
 
 ## Build
 
+- Only after an approved plan (or a clearly trivial one-file task).
 - Follow the approved plan only.
 - Prefer existing patterns in the repo.
 - Run the project test/lint commands from the stack overlay after meaningful changes.
 - If the plan is wrong, stop and re-plan — do not silently expand scope.
 - Commits (only when the user asks): sole author = configured human git identity; no AI/`Cursor` co-author trailers; never change git config.
+- Builder is not a search engine — spawn explore for broad research.
 
 ## Review + security
 
