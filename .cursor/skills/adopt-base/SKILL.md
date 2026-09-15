@@ -51,10 +51,15 @@ Copy from source → target:
 | From | To |
 |------|----|
 | `AGENTS.md` | target root (merge Stack if they already have AGENTS.md) |
-| `docs/workflow.md`, `docs/overlay-guide.md`, `docs/recommended-skills.md` | `target/docs/` |
-| `.cursor/agents/*.md` | `target/.cursor/agents/` |
-| `.cursor/rules/00-core.mdc`, `10-sdlc.mdc`, `20-communication.mdc`, `90-stack-placeholder.mdc` | `target/.cursor/rules/` |
+| `docs/workflow.md`, `docs/overlay-guide.md`, `docs/recommended-skills.md`, `docs/mcp.md`, `docs/cloud-and-automations.md`, `docs/adopt-dry-run.md` | `target/docs/` |
+
+| `CHANGELOG.md`, `VERSION` | `target/docs/agentic-base/CHANGELOG.md`, `target/docs/agentic-base/VERSION` (create `docs/agentic-base/`; leave app root CHANGELOG untouched) |
+| `.cursor/agents/*.md` | `target/.cursor/agents/` (full crew: explorer, planner, builder, reviewer, security, verifier) |
+| `.cursor/rules/00-core.mdc`, `10-sdlc.mdc`, `15-orchestrator.mdc`, `20-communication.mdc`, `90-stack-placeholder.mdc` | `target/.cursor/rules/` |
 | `.cursor/skills/**` | `target/.cursor/skills/` |
+| `.cursor/hooks.json` | `target/.cursor/hooks.json` |
+| `.cursor/hooks/**` | `target/.cursor/hooks/` (scripts executable; `chmod +x` `*.py`) |
+| `.cursor/BUGBOT.md` | `target/.cursor/BUGBOT.md` |
 | `overlays/_template/` | `target/overlays/_template/` |
 
 Create directories as needed. Do not invent a pre-filled framework overlay.
@@ -66,3 +71,16 @@ Follow skill **`fill-stack-overlay`** on the **target** app (detect stack, write
 ### 4. Done
 
 Summarize what was installed and the stack id. Tell the user to keep chatting in the **app** project for day-to-day work.
+
+## Upgrade / re-sync
+
+When this template changes and the target already has an older install:
+
+1. Compare template root `VERSION` / `CHANGELOG.md` to `target/docs/agentic-base/VERSION` and `CHANGELOG.md` if present; summarize what’s new from `[Unreleased]` / newer versions.
+2. Re-copy rules, agents, skills, **`hooks.json`**, **`hooks/**`**, **`BUGBOT.md`**, and docs (including `docs/mcp.md`, `docs/cloud-and-automations.md`, `docs/adopt-dry-run.md`) from source → target (same table as install), including **`15-orchestrator.mdc`**. Copy `CHANGELOG.md` + `VERSION` → `target/docs/agentic-base/`. Ensure hook `*.py` stay executable. Note: `examples/` (e.g. smoke-app) is **template-only** — not copied into apps; use it as the dry-run source per `docs/adopt-dry-run.md`.
+3. If the target still has a stale **`architect.md`** (architecture role was removed — duties fold into `planner` / `builder`), **delete** `target/.cursor/agents/architect.md`.
+4. Re-run or refresh `fill-stack-overlay` only if stack wiring is missing or outdated. If the app already has an overlay, re-copy `stack-commands` into `.cursor/skills/` if missing.
+5. Summarize what was updated vs left alone.
+
+Do not special-case architect beyond deleting a leftover agent file; the normal copy of `.cursor/agents/*.md` is enough for the current crew.
+

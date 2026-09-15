@@ -11,6 +11,9 @@ Skills teach **when/how** to do a recurring workflow. Agents encode **roles**. K
 | `fill-stack-overlay` | Detect stack → `overlays/<stack>/` |
 | `ship-checklist` | Pre-merge gate |
 | `pr-review` | Structured review output (critical / suggestion / nit) |
+| `debug-incident` | Reproduce → hypothesize → minimal fix via builder → regression test |
+| `add-test` | Smallest failing/locking test in the project’s style |
+| `migrate-schema` | Expand/contract, rollback, backfill checklist (commands from overlay) |
 
 Communication “caveman” / status compression is **in-repo** (`20-communication` + agent files) — not a separate skill and **not** an external pack to install.
 
@@ -20,23 +23,29 @@ Create these when the pain shows up twice; don’t invent a zoo up front.
 
 | Skill idea | When it pays off |
 |------------|------------------|
-| **`debug-incident`** | Reproduce → hypothesize → minimal fix → regression test; keeps debug out of random builder thrash |
-| **`add-test`** | Given a behavior/bug, add the smallest failing then passing test in the project’s style |
 | **`refactor-safe`** | Rename/extract only with characterization tests + no behavior change |
-| **`migrate-schema`** | DB/API migration checklist (expand/contract, rollback, data backfill) |
 | **`release-notes`** | Summarize commits/PR for changelog from git log + user-facing deltas |
 | **`dependency-bump`** | Upgrade one dep: lockfile, changelog skim, run tests, note breaks |
 | **`oncall-runbook`** | Product-specific: logs, health checks, rollback commands (per app) |
 | **`api-contract`** | OpenAPI/JSON schema change + consumer impact checklist |
 
+## Hooks vs skills
+
+Project hooks (`.cursor/hooks.json` + `.cursor/hooks/*`) **enforce** dangerous-git gates and secret scans (failClosed). Skills do not replace them.
+
+For ship complements: use Cursor skills **`review-bugbot`** / **`review-security`** (`/review-bugbot`, `/review-security`) after the in-repo `reviewer` / `security` / `verifier` crew — optional, not required.
+
+Optional MCP / external tools (GitHub, tickets, observability): see [`docs/mcp.md`](mcp.md). Do not bake project servers into `.cursor/mcp.json` by default.
+
 ## Cursor / ecosystem skills worth adopting
 
-- Stack-specific commands (your overlay’s `stack-commands` — always)
+- Stack-specific commands (your overlay’s `stack-commands` — always; also under `.cursor/skills/stack-commands/`)
 - Official Cursor skills you already use (e.g. create-rule, create-skill) — keep **personal** if not shared
+- `review-bugbot` / `review-security` — optional ship-gate complements when available
 
 ## What not to skill-ify
 
-- One-off product features (that’s planner → builder)
+- One-off product features (that’s lean loop: explore? → Plan mode or planner → builder → STOP; R/S/V on request or ship — see `docs/workflow.md`)
 - Framework tutorials (link docs in overlay instead)
 - Duplicate of an agent role (don’t make a “reviewer skill” that reimplements `reviewer`)
 
@@ -44,7 +53,7 @@ Create these when the pain shows up twice; don’t invent a zoo up front.
 
 1. `.cursor/skills/<name>/SKILL.md` with a **trigger-rich** `description`
 2. Steps + output shape; point at overlay commands for test/lint
-3. Mention it in `AGENTS.md` or this file if it’s part of the default loop
+3. Mention it in `AGENTS.md` or this file if it’s part of the lean loop / ship gate
 4. Re-run `adopt-base` / copy into apps that need it
 
-Rule of thumb: **agent** = who (role + permissions); **skill** = how/when for a repeatable procedure.
+Rule of thumb: **agent** = who (role + permissions); **skill** = how/when for a repeatable procedure. Default path ends after build (STOP; suggest R/S/V). Plan deny → Task `planner`. No auto R/S/V after build.

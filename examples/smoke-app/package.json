@@ -1,0 +1,12 @@
+{
+  "name": "smoke-app",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Toy stub for agentic_base adopt dry-run — not a product",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "lint": "echo ok"
+  },
+  "main": "src/index.js"
+}

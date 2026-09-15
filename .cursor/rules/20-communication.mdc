@@ -29,7 +29,7 @@ Defined **in this template** — do **not** install third-party caveman skill pa
 - Error logs and stack traces
 - Commit messages and PR bodies
 - Security warnings and irreversible-action confirmations
-- Planner output (goal, steps, risks, test plan)
+- Planner output (goal, steps, risks, architecture notes)
 - Security write-ups
 
 User-facing final answers should stay clear even when builder status was terse.

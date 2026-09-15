@@ -1,63 +1,62 @@
 # Agentic base template
 
-Tech-agnostic Cursor template for agentic programming: role agents, lean SDLC rules, and reusable skills.
+Tech-agnostic Cursor template: role agents, lean SDLC rules, reusable skills.
 
-No framework overlay is shipped. After install, skill **`fill-stack-overlay`** builds one from the app itself.
+**Version:** [`VERSION`](VERSION) (`0.3.0`). History: [`CHANGELOG.md`](CHANGELOG.md). On adopt, both land under `docs/agentic-base/` (app changelog untouched).
 
-## How to use (prompt)
+No framework overlay ships. After install, **`fill-stack-overlay`** builds one from the app and always copies `stack-commands` into `.cursor/skills/`.
 
-Clone or download this repo into the **parent folder** next to your apps (e.g. `projects/agentic_base` beside `projects/my-app`).
+### Install
 
-Open it in Cursor and prompt:
+1. Put this repo next to the app (`projects/agentic_base` + `projects/my-app`).
+2. Open **agentic_base** in Cursor.
+3. Prompt: `Use this as the agentic template for ../my-app`
+4. Agent runs **adopt-base** → **fill-stack-overlay**. Then work in **my-app**.
 
-```text
-Use this as the agentic template for ../my-app
-```
+**Also accepts:** “install agentic base into …”, `/adopt-base`.
 
-The agent runs **`adopt-base`** then **`fill-stack-overlay`**. Continue work in the **app** project.
+**Upgrade:** same prompt / re-sync; see [adopt-base Upgrade](.cursor/skills/adopt-base/SKILL.md#upgrade--re-sync). Version history: [CHANGELOG](CHANGELOG.md).
 
-Same idea: “install agentic base into …”, `/adopt-base`.
+**Dry-run:** [docs/adopt-dry-run.md](docs/adopt-dry-run.md) + [examples/smoke-app](examples/smoke-app).
+
+**What gets installed:** agents, rules, skills, hooks, BUGBOT, docs, `overlays/_template`, `docs/agentic-base` VERSION+CHANGELOG. **Not copied:** `examples/`.
+
+**Manual copy:** same files as the [adopt-base file table](.cursor/skills/adopt-base/SKILL.md#2-install-files-agent-performs).
+
+**Success:** after install + overlay, non-trivial work follows the lean role loop without re-explaining it. Core stays stack-agnostic; stack facts live under `overlays/<stack>/` in the app.
 
 ## What’s inside
 
-| Path | Purpose |
-|------|---------|
-| [`AGENTS.md`](AGENTS.md) | Orchestration contract — roles, workflow, stack pointers |
-| [`docs/workflow.md`](docs/workflow.md) | explore → plan → build → review → secure → verify |
-| [`docs/overlay-guide.md`](docs/overlay-guide.md) | How overlays are created and wired |
-| [`docs/recommended-skills.md`](docs/recommended-skills.md) | Extra skills worth adding later |
-| [`.cursor/agents/`](.cursor/agents/) | `explorer`, `planner`, `builder`, `reviewer`, `security`, `verifier` |
-| [`.cursor/rules/`](.cursor/rules/) | Core, SDLC, **status compression** (`20-communication`), stack placeholder |
-| [`.cursor/skills/`](.cursor/skills/) | `explore-codebase`, `adopt-base`, `fill-stack-overlay`, `ship-checklist`, `pr-review` |
-| [`overlays/_template/`](overlays/_template/) | Empty slot used when generating a stack overlay |
+| Area | Contents |
+|------|----------|
+| Contract | [`AGENTS.md`](AGENTS.md), [`VERSION`](VERSION), [`CHANGELOG.md`](CHANGELOG.md) |
+| Docs | [`workflow`](docs/workflow.md), [`overlay-guide`](docs/overlay-guide.md), [`mcp`](docs/mcp.md), [`cloud-and-automations`](docs/cloud-and-automations.md), [`adopt-dry-run`](docs/adopt-dry-run.md), [`recommended-skills`](docs/recommended-skills.md) |
+| Agents | [`.cursor/agents/`](.cursor/agents/) — explorer, planner, builder, reviewer, security, verifier |
+| Rules | [`.cursor/rules/`](.cursor/rules/) — core, SDLC, orchestrator, communication, stack placeholder |
+| Skills | [`.cursor/skills/`](.cursor/skills/) — adopt-base, fill-stack-overlay, explore-codebase, ship-checklist, pr-review, debug-incident, add-test, migrate-schema |
+| Hooks / Bugbot | [`.cursor/hooks.json`](.cursor/hooks.json), [`.cursor/hooks/`](.cursor/hooks/), [`.cursor/BUGBOT.md`](.cursor/BUGBOT.md) |
+| Overlay slot | [`overlays/_template/`](overlays/_template/) |
+| Template-only | [`examples/smoke-app/`](examples/smoke-app/) — adopt dry-run stub (not copied into apps) |
 
-## Roles (quick)
+## Roles + default loop
 
-0. **explorer** (readonly, lite) — search/map; save builder context (`explore-codebase`)  
-1. **planner** (readonly, lite) — plan only  
-2. **builder** (writes, full status compression) — implement approved plan  
-3. **reviewer** (readonly, lite) — correctness / tests / regressions  
-4. **security** (readonly, normal prose) — confirmed vulns + fixes  
-5. **verifier** (readonly, lite) — prove acceptance criteria  
+| Role | Job |
+|------|-----|
+| **explorer** | Search/map (readonly) |
+| **planner** | Plan mid-Agent; architecture fit at design-time |
+| **builder** | Implement approved plan |
+| **reviewer** | Correctness / tests / regressions |
+| **security** | OWASP / secrets |
+| **verifier** | Prove acceptance criteria |
 
-Default loop: explore (if searching) → plan (if non-trivial, no plan yet) → build → review/secure → verify.
+Default: explore (if searching) → plan (if non-trivial; Plan deny → planner) → build → **STOP** (suggest R/S/V). Ship: reviewer + security → verifier + ship-checklist; optional Bugbot + Cursor `/review-security`.
 
 ## Status compression (“caveman”)
 
-Built into [`.cursor/rules/20-communication.mdc`](.cursor/rules/20-communication.mdc) and each agent file. **No** `npx skills add …` / third-party pack required.
-
-- Builder: terse status while working  
-- Explorer / planner / reviewer / verifier: lite  
-- Security + plans + errors/commits: never compressed  
-
-## Manual copy (optional)
-
-Only if you install without the agent — same files as `adopt-base`. Still keep this repo in the parent folder so paths like `../my-app` work.
+In [`.cursor/rules/20-communication.mdc`](.cursor/rules/20-communication.mdc) — no third-party pack. Builder: terse status. Explorer/planner/reviewer/verifier: lite. Security, plans, errors/commits: never compressed.
 
 ## Deferred
 
-- Push gates, format hooks — add later if needed.
+- Format hooks — add later if needed.
 
-## Success check
-
-After prompt install + overlay fill: non-trivial work uses the role loop without re-explaining it. Core stays framework-agnostic; stack facts live under `overlays/<stack>/` for that app only.
+See [CHANGELOG](CHANGELOG.md) for shipped work.

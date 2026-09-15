@@ -35,4 +35,4 @@ Prefer the `stack-commands` skill. Summary:
 
 1. Copy `rules/stack.mdc` → project `.cursor/rules/90-stack.mdc`
 2. Point root `AGENTS.md` Stack section here
-3. Optionally copy `skills/stack-commands/` into `.cursor/skills/`
+3. **Always** copy `skills/stack-commands/` → `.cursor/skills/stack-commands/` (runtime for agents; overlay path remains source of truth)

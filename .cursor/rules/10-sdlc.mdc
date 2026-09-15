@@ -1,15 +1,15 @@
 ---
-description: SDLC loop — plan first, smallest change, tests, docs only when needed
+description: SDLC quality gates — smallest change, tests, docs; orchestration lives in 15-orchestrator
 alwaysApply: true
 ---
 
 # SDLC
 
-- Non-trivial work: **explore (if needed) → plan → implement → review/secure → verify** (see `docs/workflow.md` and `AGENTS.md`).
-- **Explore first for search:** when the task needs codebase search, grep, “where is X?”, or subsystem mapping, spawn **explore** (`Task` `explore` / skill `explore-codebase` / agent `explorer`) instead of filling **builder** context with large greps.
-- **Plan before build:** if there is no approved plan yet and the work is non-trivial (multi-file, unclear approach, API/schema/auth, or >~15 minutes), spawn **planner** and wait for approval — then **builder** only from that plan. Skip formal plan only for trivial one-file obvious fixes.
-- Prefer the smallest change that satisfies the approved plan.
+Quality gates only. Routing and lean loop: `.cursor/rules/15-orchestrator.mdc` and `docs/workflow.md` / `AGENTS.md`.
+
+- Prefer the smallest change that satisfies the approved plan (or trivial fix).
 - Every behavior change needs a matching test, or an explicit note: `no test because: …`.
 - Update docs only when user-facing behavior or public API/contracts change.
-- Before claiming merge-ready: run stack checks and use `verifier` / `ship-checklist` when appropriate.
+- Do **not** force post-build `reviewer` / `security` / `verifier` — those run when the user asks or on ship / merge-ready (see `15-orchestrator`).
+- When the user asks to ship / merge-ready: `reviewer` + `security` → `verifier` + skill `ship-checklist`.
 - Capture recurring agent mistakes as new focused rules later — do not grow this file into a novel.

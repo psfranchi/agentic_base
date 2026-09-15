@@ -42,6 +42,8 @@ cp -R overlays/_template overlays/<stack>
 # edit the three files, then:
 cp overlays/<stack>/rules/stack.mdc .cursor/rules/90-stack.mdc
 rm -f .cursor/rules/90-stack-placeholder.mdc
+# Required — Cursor indexes .cursor/skills reliably; overlay copy alone is insufficient:
+cp -R overlays/<stack>/skills/stack-commands .cursor/skills/stack-commands
 ```
 
-Update `AGENTS.md` **Stack** section to match.
+Update `AGENTS.md` **Stack** section to match (point at both overlay source and `.cursor/skills/stack-commands/`).

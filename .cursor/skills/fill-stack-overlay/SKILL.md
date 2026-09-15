@@ -22,7 +22,8 @@ Overlay progress:
 - [ ] 3. Discover commands and layout in-repo
 - [ ] 4. Fill AGENTS.stack.md, rules/stack.mdc, skills/stack-commands/SKILL.md
 - [ ] 5. Wire into .cursor/rules/90-stack.mdc + AGENTS.md Stack section
-- [ ] 6. Sanity-check: core agents stay stack-agnostic
+- [ ] 6. Always copy stack-commands → .cursor/skills/stack-commands/
+- [ ] 7. Sanity-check: core agents stay stack-agnostic
 ```
 
 ## 1. Detect stack id
@@ -80,10 +81,11 @@ Then:
 1. Copy `overlays/<stack>/rules/stack.mdc` → `.cursor/rules/90-stack.mdc`
 2. Remove `.cursor/rules/90-stack-placeholder.mdc` if present
 3. Update root `AGENTS.md` **Stack** section with overlay name + paths
-4. Optionally copy `overlays/<stack>/skills/stack-commands/` → `.cursor/skills/stack-commands/`
+4. **Always** copy `overlays/<stack>/skills/stack-commands/` → `.cursor/skills/stack-commands/` (Cursor indexes `.cursor/skills` reliably; overlay-only copy is insufficient). Skill files are Markdown — `chmod` / executable bits are N/A.
 
 ## Done when
 
 - `overlays/<stack>/` exists and is filled from this repo
-- Agents can run test/lint from the overlay alone
+- `.cursor/skills/stack-commands/` matches the overlay’s `skills/stack-commands/`
+- Agents can run test/lint from the overlay / stack-commands skill alone
 - No other stack’s assumptions sit in core agents/rules
