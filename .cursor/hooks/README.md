@@ -13,7 +13,7 @@ Configured in `.cursor/hooks.json`.
 ## Behavior
 
 - **block-dangerous-git:** deny `git push` (any, incl. force), `reset --hard`, `clean -f*`, `filter-branch`, interactive rebase; **ask** on `commit --amend` and non-interactive `rebase`; allow normal status/diff/log/commit. User owns push; agents must not push; commit only when the user explicitly asked (amend still needs UI ask).
-- **scan-secrets-\*:** high-confidence patterns only (AWS `AKIA…`, PEM/private keys, `ghp_` / `gho_` / `github_pat_`, Slack `xox*`, api_key assignments with 20+ chars, URL user:pass). Mentions of `.env` without values are not blocked.
+- **scan-secrets-\*:** high-confidence patterns only (AWS `AKIA…`, PEM/private keys, `ghp_` / `gho_` / `github_pat_`, Slack `xox*`, api_key assignments with 20+ chars, URL user:pass — except `localhost` / `127.0.0.1` dev URLs). Mentions of `.env` without values are not blocked.
 
 ## failClosed
 

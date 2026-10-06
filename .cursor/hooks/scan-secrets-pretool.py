@@ -21,8 +21,11 @@ SECRET_PATTERNS: list[re.Pattern[str]] = [
         r"api[_-]?key\s*[:=]\s*['\"]?[A-Za-z0-9_\-]{20,}",
         re.IGNORECASE,
     ),
-    re.compile(r"://[^\s:]+:[^\s@]+@"),
 ]
+
+# user:pass@host in URLs; local dev hosts are exempt (e.g. postgres://u:p@localhost/db).
+URL_CREDENTIALS = re.compile(r"://[^\s:/@]+:[^\s@]+@([^\s/:?#]+)")
+LOCAL_HOSTS = frozenset({"localhost", "127.0.0.1"})
 
 
 def _respond(
@@ -77,7 +80,9 @@ def _has_secret(text: str) -> bool:
     for pat in SECRET_PATTERNS:
         if pat.search(text):
             return True
-    return False
+    return any(
+        m.group(1).lower() not in LOCAL_HOSTS for m in URL_CREDENTIALS.finditer(text)
+    )
 
 
 def main() -> None:

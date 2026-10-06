@@ -11,6 +11,10 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 - README install guide tightened.
 
+### Fixed
+
+- Secret-scan hooks no longer block URL credentials on `localhost` / `127.0.0.1` (local dev DB URLs, test fixtures).
+
 ## [0.3.0] - 2026-09-15
 
 ### Added
