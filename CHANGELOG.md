@@ -7,6 +7,10 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+### Changed
+
+- `adopt-base` no longer prompts for subagent models or needs the Cursor CLI (`agent models`): every role installs as `model: inherit` (Auto). Apps configure per-role models themselves in `.cursor/agents/<role>.md` + the `AGENTS.md` Subagent models table; re-sync still preserves them. The optional Codex security-backend question stays.
+
 ## [0.4.0] - 2026-10-15
 
 ### Added

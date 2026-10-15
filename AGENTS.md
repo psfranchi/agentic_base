@@ -17,7 +17,7 @@ Tech-agnostic agent workflow. Stack details live in the active overlay (see Stac
 
 ## Subagent models
 
-Chosen at install by `adopt-base` (Auto or per role). Source of truth: `model:` frontmatter in `.cursor/agents/<role>.md`; this table mirrors it. Re-sync preserves both.
+`adopt-base` installs every role as `inherit` (Auto); configure per project by editing `model:` frontmatter in `.cursor/agents/<role>.md` (source of truth) and mirroring it here. Re-sync preserves both.
 
 | Role | Model | Backend |
 |------|-------|---------|

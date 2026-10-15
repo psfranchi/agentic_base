@@ -31,9 +31,9 @@ This repo lives in the **parent folder** next to application repos (e.g. `…/pr
 ```
 Adopt progress:
 - [ ] 1. Resolve source (this template) + target app path
-- [ ] 1b. Ask the user: subagent models — Auto or choose per role
+- [ ] 1b. Ask the user: security backend (only if `codex` is on PATH)
 - [ ] 2. Copy/merge core files into the target (you do it)
-- [ ] 2b. Apply model choices to target agents + AGENTS.md table
+- [ ] 2b. Keep all agents on `model: inherit`; set security backend in AGENTS.md table
 - [ ] 3. fill-stack-overlay on the target
 - [ ] 4. Confirm AGENTS.md Stack section
 - [ ] 5. Tell user to open/continue in the app workspace
@@ -46,21 +46,11 @@ Adopt progress:
 
 If target is unclear, ask once. If target `.cursor/` exists, ask before overwrite — merge by default (keep their extras; replace/update our named agent/rule/skill files).
 
-### 1b. Subagent models (always prompt)
+### 1b. Security backend (only if Codex is installed)
 
-Ask before copying (use `AskQuestion` when available; batch with any other install questions):
+Do **not** ask about subagent models. Every role installs as `model: inherit` (Auto — subagents follow the chat's model). Each app configures per-role models later, if it wants, by editing `model:` in its own `.cursor/agents/<role>.md` and the **Subagent models** table in its `AGENTS.md`.
 
-1. **Mode**
-   - **Auto** (recommended) — every role keeps `model: inherit`; subagents follow whatever model the chat runs on (e.g. Cursor Auto).
-   - **Choose per role** — continue to step 2.
-2. **Per role** (explorer, planner, builder, reviewer, security, verifier). Options: `inherit` plus real model IDs for the user's account.
-   - Get IDs from the Cursor CLI: `agent models` (or `agent --list-models`); needs network. If the CLI is missing, ask the user to paste IDs (or install the CLI) — do not invent IDs or reuse display names.
-   - Model parameters use brackets: `<id>[effort=high,fast=true]`. Only use parameters the CLI lists for that ID.
-   - `auto` is **not** a valid subagent value — "Auto" means `inherit`.
-   - Free-text answers like "latest grok" → resolve to the newest matching listed ID and state the mapping back.
-3. **Security backend** — ask only if `codex` is on `PATH` (`command -v codex`); otherwise skip silently. Options: **Cursor subagent** (default) or **Codex CLI** (the `security` subagent runs `codex review` and validates its findings — see `.cursor/agents/security.md`; its `model:` then only drives the wrapper, `inherit` is fine). Never select Codex without an explicit yes.
-
-Never write `model:` values for roles the user did not answer — default those to `inherit`. Unavailable IDs fall back to a compatible model in Cursor; the Task card shows which model actually ran.
+Ask only if `codex` is on `PATH` (`command -v codex`); otherwise skip silently and use `cursor`. Options: **Cursor subagent** (default) or **Codex CLI** (the `security` subagent runs `codex review` and validates its findings — see `.cursor/agents/security.md`). Never select Codex without an explicit yes.
 
 ### 2. Install files (agent performs)
 
@@ -82,10 +72,10 @@ Copy from source → target:
 
 Create directories as needed. Do not invent a pre-filled framework overlay.
 
-### 2b. Apply model choices
+### 2b. Models and security backend
 
-- Set the `model:` frontmatter line in each `target/.cursor/agents/<role>.md` (the only per-install edit to agent files).
-- Fill the **Subagent models** table in target `AGENTS.md` to match, including `security` backend (`cursor` or `codex-cli`).
+- Leave `model: inherit` in every `target/.cursor/agents/<role>.md` as copied — no per-install model edits.
+- In target `AGENTS.md` **Subagent models** table, keep every model `inherit` and set the `security` backend (`cursor` or `codex-cli`).
 
 ### 3. Overlay
 
@@ -100,11 +90,11 @@ Summarize what was installed and the stack id. Tell the user to keep chatting in
 When this template changes and the target already has an older install:
 
 1. Compare template root `VERSION` / `CHANGELOG.md` to `target/docs/agentic-base/VERSION` and `CHANGELOG.md` if present; summarize what’s new from `[Unreleased]` / newer versions.
-2. Before re-copying agents, record each target agent's current `model:` value and the target **Subagent models** table; restore both after the copy. Re-prompt (step 1b) only if the user asks, or if a role is new and has no recorded choice.
+2. Before re-copying agents, record each target agent's current `model:` value and the target **Subagent models** table (the app may have configured its own models); restore both after the copy. New roles get `inherit`. Re-ask the security backend (step 1b) only if the user asks.
 3. Re-copy rules, agents, skills, **`hooks.json`**, **`hooks/**`**, **`BUGBOT.md`**, and docs (including `docs/mcp.md`, `docs/cloud-and-automations.md`, `docs/adopt-dry-run.md`) from source → target (same table as install), including **`15-orchestrator.mdc`**. Copy `CHANGELOG.md` + `VERSION` → `target/docs/agentic-base/`. Ensure hook `*.py` stay executable. Note: `examples/` (e.g. smoke-app) is **template-only** — not copied into apps; use it as the dry-run source per `docs/adopt-dry-run.md`.
 4. If the target still has a stale **`architect.md`** (architecture role was removed — duties fold into `planner` / `builder`), **delete** `target/.cursor/agents/architect.md`.
 5. Re-run or refresh `fill-stack-overlay` only if stack wiring is missing or outdated. If the app already has an overlay, re-copy `stack-commands` into `.cursor/skills/` if missing.
-6. Summarize what was updated vs left alone (including preserved model choices).
+6. Summarize what was updated vs left alone (including preserved model values).
 
 Do not special-case architect beyond deleting a leftover agent file; the normal copy of `.cursor/agents/*.md` is enough for the current crew.
 

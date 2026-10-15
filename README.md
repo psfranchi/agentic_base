@@ -11,7 +11,7 @@ No framework overlay ships. After install, **`fill-stack-overlay`** builds one f
 1. Put this repo next to the app (`projects/agentic_base` + `projects/my-app`).
 2. Open **agentic_base** in Cursor.
 3. Prompt: `Use this as the agentic template for ../my-app`
-4. Agent asks **subagent models**: Auto (all `inherit`) or pick per role — if `codex` is installed it also asks whether **security** should use your local **Codex CLI** (off unless you say yes).
+4. All subagents install as `model: inherit` (Auto); set per-role models later inside each app. If `codex` is installed, the agent asks whether **security** should use your local **Codex CLI** (off unless you say yes).
 5. Agent runs **adopt-base** → **fill-stack-overlay**. Then work in **my-app**.
 
 **Also accepts:** “install agentic base into …”, `/adopt-base`.
