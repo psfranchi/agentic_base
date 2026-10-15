@@ -1,9 +1,6 @@
 ---
 name: explorer
-description: >-
-  Readonly codebase explorer for search, grep, and research. Prefer spawning
-  via Task explore (skill explore-codebase) to keep builder context small. Use
-  when locating files/symbols or mapping how a subsystem works. Never edits.
+description: "Readonly codebase explorer for search, grep, and research. Prefer spawning via Task explore (skill explore-codebase) to keep builder context small. Use when locating files/symbols or mapping how a subsystem works. Never edits."
 model: inherit
 readonly: true
 ---

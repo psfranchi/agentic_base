@@ -31,9 +31,8 @@ This repo lives in the **parent folder** next to application repos (e.g. `…/pr
 ```
 Adopt progress:
 - [ ] 1. Resolve source (this template) + target app path
-- [ ] 1b. Ask the user: security backend (only if `codex` is on PATH)
 - [ ] 2. Copy/merge core files into the target (you do it)
-- [ ] 2b. Keep all agents on `model: inherit`; set security backend in AGENTS.md table
+- [ ] 2b. Keep all agents on `model: inherit`
 - [ ] 3. fill-stack-overlay on the target
 - [ ] 4. Confirm AGENTS.md Stack section
 - [ ] 5. Tell user to open/continue in the app workspace
@@ -45,12 +44,6 @@ Adopt progress:
 - **Target**: path the user gave (typically a sibling under the same parent folder).
 
 If target is unclear, ask once. If target `.cursor/` exists, ask before overwrite — merge by default (keep their extras; replace/update our named agent/rule/skill files).
-
-### 1b. Security backend (only if Codex is installed)
-
-Do **not** ask about subagent models. Every role installs as `model: inherit` (Auto — subagents follow the chat's model). Each app configures per-role models later, if it wants, by editing `model:` in its own `.cursor/agents/<role>.md` and the **Subagent models** table in its `AGENTS.md`.
-
-Ask only if `codex` is on `PATH` (`command -v codex`); otherwise skip silently and use `cursor`. Options: **Cursor subagent** (default) or **Codex CLI** (the `security` subagent runs `codex review` and validates its findings — see `.cursor/agents/security.md`). Never select Codex without an explicit yes.
 
 ### 2. Install files (agent performs)
 
@@ -72,10 +65,12 @@ Copy from source → target:
 
 Create directories as needed. Do not invent a pre-filled framework overlay.
 
-### 2b. Models and security backend
+### 2b. Models
+
+Do **not** ask about subagent models. Every role installs as `model: inherit` (Auto — subagents follow the chat's model). Each app configures per-role models later, if it wants, by editing `model:` in its own `.cursor/agents/<role>.md` and the **Subagent models** table in its `AGENTS.md`.
 
 - Leave `model: inherit` in every `target/.cursor/agents/<role>.md` as copied — no per-install model edits.
-- In target `AGENTS.md` **Subagent models** table, keep every model `inherit` and set the `security` backend (`cursor` or `codex-cli`).
+- Keep every model `inherit` in the target `AGENTS.md` **Subagent models** table.
 
 ### 3. Overlay
 

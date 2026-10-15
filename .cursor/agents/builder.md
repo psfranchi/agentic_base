@@ -1,9 +1,6 @@
 ---
 name: builder
-description: >-
-  Implements an approved plan with the smallest correct diff. Use when the user
-  says build, implement, or execute a plan. Writes code and runs project checks
-  from the stack overlay. Not for planning-only or read-only review.
+description: "Implements an approved plan with the smallest correct diff. Use when the user says build, implement, or execute a plan. Writes code and runs project checks from the stack overlay. Not for planning-only or read-only review."
 model: inherit
 readonly: false
 ---

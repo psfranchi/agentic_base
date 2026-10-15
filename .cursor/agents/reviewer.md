@@ -1,10 +1,6 @@
 ---
 name: reviewer
-description: >-
-  Adversarial code review focused on correctness, missing tests, unreadable or
-  over-coupled structure, API contracts, and regressions — not style nits. Use
-  when the user asks for review, for a PR review, or on ship / merge-ready —
-  not automatically after every build. Readonly — never edits.
+description: "Adversarial code review focused on correctness, missing tests, unreadable or over-coupled structure, API contracts, and regressions — not style nits. Use when the user asks for review, for a PR review, or on ship / merge-ready — not automatically after every build. Readonly — never edits."
 model: inherit
 readonly: true
 ---

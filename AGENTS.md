@@ -19,16 +19,16 @@ Tech-agnostic agent workflow. Stack details live in the active overlay (see Stac
 
 `adopt-base` installs every role as `inherit` (Auto); configure per project by editing `model:` frontmatter in `.cursor/agents/<role>.md` (source of truth) and mirroring it here. Re-sync preserves both.
 
-| Role | Model | Backend |
-|------|-------|---------|
-| explorer | `inherit` | cursor |
-| planner | `inherit` | cursor |
-| builder | `inherit` | cursor |
-| reviewer | `inherit` | cursor |
-| security | `inherit` | cursor |
-| verifier | `inherit` | cursor |
+| Role | Model |
+|------|-------|
+| explorer | `inherit` |
+| planner | `inherit` |
+| builder | `inherit` |
+| reviewer | `inherit` |
+| security | `inherit` |
+| verifier | `inherit` |
 
-`inherit` = follow the chat's model (Auto when the chat uses Auto). Backend `codex-cli` (security only) = run `codex review` and validate its findings; see `.cursor/agents/security.md`.
+`inherit` = follow the chat's model (Auto when the chat uses Auto).
 
 **Explore naming:** role `explorer` · Task type `"explore"` · skill `explore-codebase` — same job. Use skill / Task `explore` for broad search so **builder** context stays small.
 

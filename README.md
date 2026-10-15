@@ -2,7 +2,7 @@
 
 Tech-agnostic Cursor template: role agents, lean SDLC rules, reusable skills.
 
-**Version:** [`VERSION`](VERSION) (`0.4.0`). History: [`CHANGELOG.md`](CHANGELOG.md). On adopt, both land under `docs/agentic-base/` (app changelog untouched).
+**Version:** [`VERSION`](VERSION) (`0.5.0`). History: [`CHANGELOG.md`](CHANGELOG.md). On adopt, both land under `docs/agentic-base/` (app changelog untouched).
 
 No framework overlay ships. After install, **`fill-stack-overlay`** builds one from the app and always copies `stack-commands` into `.cursor/skills/`.
 
@@ -11,7 +11,7 @@ No framework overlay ships. After install, **`fill-stack-overlay`** builds one f
 1. Put this repo next to the app (`projects/agentic_base` + `projects/my-app`).
 2. Open **agentic_base** in Cursor.
 3. Prompt: `Use this as the agentic template for ../my-app`
-4. All subagents install as `model: inherit` (Auto); set per-role models later inside each app. If `codex` is installed, the agent asks whether **security** should use your local **Codex CLI** (off unless you say yes).
+4. All subagents install as `model: inherit` (Auto); set per-role models later inside each app.
 5. Agent runs **adopt-base** → **fill-stack-overlay**. Then work in **my-app**.
 
 **Also accepts:** “install agentic base into …”, `/adopt-base`.

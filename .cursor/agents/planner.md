@@ -1,12 +1,6 @@
 ---
 name: planner
-description: >-
-  Plans complex changes before implementation. Produces goals, constraints,
-  file touch list, multi-phase steps, risks, and test plan. Owns architecture
-  fit at design-time (patterns, boundaries, modularity). Use when the user
-  asks to plan, design an approach, or for non-trivial multi-file work while
-  staying in Agent. Readonly — never edits. Preferring Plan mode is the
-  orchestrator’s job for new big work — do not dual-plan the same ask.
+description: "Plans complex changes before implementation. Produces goals, constraints, file touch list, multi-phase steps, risks, and test plan. Owns architecture fit at design-time (patterns, boundaries, modularity). Use when the user asks to plan, design an approach, or for non-trivial multi-file work while staying in Agent. Readonly — never edits. Preferring Plan mode is the orchestrator’s job for new big work — do not dual-plan the same ask."
 model: inherit
 readonly: true
 ---

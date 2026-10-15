@@ -7,9 +7,19 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-10-15
+
+### Fixed
+
+- Subagent `description:` in `.cursor/agents/*.md` is now a single quoted line. Cursor's subagent loader read the YAML folded block (`>-`) literally, so every custom subagent showed `>-` as its description and could not be routed by intent. Skills are unaffected; keep agent descriptions single-line.
+
 ### Changed
 
-- `adopt-base` no longer prompts for subagent models or needs the Cursor CLI (`agent models`): every role installs as `model: inherit` (Auto). Apps configure per-role models themselves in `.cursor/agents/<role>.md` + the `AGENTS.md` Subagent models table; re-sync still preserves them. The optional Codex security-backend question stays.
+- `adopt-base` no longer prompts for subagent models or needs the Cursor CLI (`agent models`): every role installs as `model: inherit` (Auto). Apps configure per-role models themselves in `.cursor/agents/<role>.md` + the `AGENTS.md` Subagent models table; re-sync still preserves them.
+
+### Removed
+
+- Codex CLI security backend: the `adopt-base` question, the `Backend` column in the `AGENTS.md` Subagent models table, and the Codex procedure in `.cursor/agents/security.md`. All roles run as normal Cursor subagents on Cursor models. It never worked in practice: `security` is `readonly: true`, which blocks shell commands, including `codex`.
 
 ## [0.4.0] - 2026-10-15
 
