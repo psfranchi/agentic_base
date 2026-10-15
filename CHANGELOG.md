@@ -7,9 +7,18 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-15
+
+### Added
+
+- `adopt-base` always prompts for subagent models: **Auto** (all `inherit`) or **choose per role** using real IDs from `agent models` (bracket parameters, e.g. `<id>[effort=high]`). Choices are written to each agent's `model:` frontmatter and mirrored in a new **Subagent models** table in `AGENTS.md`.
+- Optional **Codex CLI** backend for `security`, asked at install only when `codex` is on `PATH` and off unless the user opts in: runs `codex review` (uncommitted / base / commit), validates each finding, and falls back to a normal review when Codex is missing or fails.
+
 ### Changed
 
-- README install guide tightened.
+- README install guide tightened; mentions the model prompt.
+- `adopt-base` upgrade / re-sync preserves existing model choices and the Subagent models table.
+- `verifier` now `readonly: false` so test / build runs can write caches and output (Cursor's readonly blocks state-changing shell); instructions still forbid editing repo files or running source-modifying commands. `security` stays readonly and notes the Codex CLI may need user approval.
 
 ### Fixed
 

@@ -15,6 +15,21 @@ Tech-agnostic agent workflow. Stack details live in the active overlay (see Stac
 
 **Main agent = orchestrator.** Prefer delegating to these subagents instead of replaying their job in the same context. Orchestrator **never edits app code/tests/config** (always spawn `builder`) and **never** commit/push/amend. May edit steering/docs when asked. See `.cursor/rules/15-orchestrator.mdc`.
 
+## Subagent models
+
+Chosen at install by `adopt-base` (Auto or per role). Source of truth: `model:` frontmatter in `.cursor/agents/<role>.md`; this table mirrors it. Re-sync preserves both.
+
+| Role | Model | Backend |
+|------|-------|---------|
+| explorer | `inherit` | cursor |
+| planner | `inherit` | cursor |
+| builder | `inherit` | cursor |
+| reviewer | `inherit` | cursor |
+| security | `inherit` | cursor |
+| verifier | `inherit` | cursor |
+
+`inherit` = follow the chat's model (Auto when the chat uses Auto). Backend `codex-cli` (security only) = run `codex review` and validate its findings; see `.cursor/agents/security.md`.
+
 **Explore naming:** role `explorer` · Task type `"explore"` · skill `explore-codebase` — same job. Use skill / Task `explore` for broad search so **builder** context stays small.
 
 ## Lean workflow

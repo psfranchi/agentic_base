@@ -28,7 +28,8 @@ Alternate: if you keep the stub only under `examples/smoke-app`, adopt into that
 
 Confirm on the target (e.g. `../smoke-app`):
 
-- [ ] `.cursor/agents/` — explorer, planner, builder, reviewer, security, verifier
+- [ ] Install prompted for subagent models (Auto or per role)
+- [ ] `.cursor/agents/` — explorer, planner, builder, reviewer, security, verifier; `model:` values match the answers and the `AGENTS.md` **Subagent models** table
 - [ ] `.cursor/rules/` — core, SDLC, orchestrator, communication, stack rule (placeholder replaced or overlay-wired)
 - [ ] `.cursor/skills/` — template skills including new playbooks; **`stack-commands`** present after fill
 - [ ] `.cursor/hooks.json` + `.cursor/hooks/` (scripts executable)
